@@ -1,7 +1,8 @@
 # Rozpoznawanie komend głosowych
-### SG-command-recognition repo
 
 Nasze repozytorium na **Systemy głosowe**.
+
+*Czym chcemy sterować? Pralką, kosiarką, rakietą, czy ewentualnie grą w kółko i krzyżyk na stronie stworzonej w Shiny?*
 
 Podstawowy schemat projektu, lista osób odpowiedzialnych za konkretne zadania oraz wyniki researchu znajdują się na Dysku:
 
@@ -16,12 +17,12 @@ http://scottchacon.com/2011/08/31/github-flow.html
 Spostrzeżenia na temat preprocesingu:
 
 > The voice of the poor has no echo.
-Indian Proverb
+[Indian Proverb]
 
 > The voice of a poor man does not carry very far.
-Laotian Proverb
+[Laotian Proverb]
 
 I ewentualnie ekstrakcji cech:
 
 > When a man raises his voice at home, know that he started lowering if elsewhere.
-African Proverb
+[African Proverb]
