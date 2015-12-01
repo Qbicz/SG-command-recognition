@@ -1,35 +1,50 @@
 library(tuneR)
 
 '
-Funkcja licz¹ca wspó³czynniki mfcc. Implementacja w bibliotece tunerR
-nie obs³uguje przetwarzanie wiêcej ni¿ jednego kana³u, dlatego w przypadku
-stereo przetwarzamy tylko wybrany kana³ (lewy).
+Funkcja licz¹ca wspó³czynniki mfcc. Implementacja zportowana ze skryptu Matlabowego:
+https://github.com/bootphon/features_extraction/blob/master/rastamat/melfcc.m
+
+Uwaga ! Implementacja funkcji w bibliotece tunerR u¿ytych do policzenia wspó³czynników mfcc (powspec, 
+audspec) nie potrafi obs³u¿yæ zbyt wielkich wektorów liczbowych. Czêœæ wspó³czynników przepe³nia siê 
+i tablica jest wyp³eniana wartoœciami NaN. 
+Przyk³adowo dla pliku 1_preprocessing/probka1.wav wartoœci¹ graniczn¹ jest d³ugoœæ wektora 
+60 000 - 70 000 (oko³o 1.5s).
 
 Wejœcie:
-  1) wave_input - za³adowane próbka w formacie wav z sygna³em wejœciowym
-  2) wintime_in - d³ugoœæ okna czasowego w  [s]
-  3) hoptime_in - d³ugoœæ kroku czasowego w [s] przy tworzeniu kolejnego
-                  okna czasowego
+  1) wave_array     - tablica liczb ca³kowitych reprezentuj¹ca plik .wav
+  2) wave_samp_rate - czêstotliwoœæ próbkowania [1/s]
 
-Zwraca wspó³czynniki mfcc:
-  1) macierz cepstra:   (12 typu cepstral na ka¿de okno czasowe).
-  2) macierz aspectrum  (forma jak w 1) - spektrum s³uchowe?) 
-  3) macierz pspectrum: (forma jak w 1) - spektrum mocy)  
+Wyjœcie
+  1) cepstra        - zwraca 12 wspó³czynników mfcc jako tablicê liczby zmiennoprzecinkowych (typ num)
+
 '
-mfcc_calculate <- function(wave_input, wintime_in, hoptime_in){
-  if ( wave_input@stereo == TRUE ){
-    mono_left           <- mono(wave_input, "left")
-    mfcc_output_left    <- melfcc(mono_left, wintime = wintime_in,
-                                  hoptime = hoptime_in, spec_out = TRUE)
-    return (mfcc_output_left)
-  } else {
-    mmfcc_output        <- melfcc(wave_input, wintime = wintime_in,
-                                  hoptime = hoptime_in, spec_out = TRUE)
-    return (mfcc_output)
-  }
+mfcc_calculate <- function(wave_array, wave_samp_rate){
+  
+  ##Oblicz czas trwania próbki
+  wave_length     <- length(wave_array)
+  window_time     <- wave_length/wave_samp_rate
+
+  ##Wymuœ jedno okno czasowe na cala probke przy obliczaniu spektrum mocy
+  power_spectrum  <- powspec(x = wave_array, sr = wave_samp_rate, wintime = window_time)
+  aud_spectrum    <- audspec(pspectrum = matrix(power_spectrum), sr = wave_samp_rate)[[1]]
+  
+  ##Transformacja cosinusowa i liftering wspó³czynników
+  cepstra         <- spec2cep(spec = matrix(aud_spectrum))[[1]]
+  cepstra         <- lifter(cepstra)
+  
+  ##Sp³aszcz macierz do tablicy i zwróæ wartoœæ
+  cepstra         <- cepstra[1:length(cepstra)]
+  return          (cepstra)
 }
 
-'Przyklad uzycia'
+'
+##Przyklad uzycia
 wave_file_input <- file.path("1_preprocessing", "probka1.wav")
 wave_input      <- readWave(wave_file_input)
-mfcc            <- mfcc_calculate(wave_input, 1.0, 0.5)
+wave_array      <- wave_input@left
+wave_samp_rate  <- wave_input@samp.rate
+
+##Obciecie czeœci przy zbyt d³ugich próbkach
+wave_array      <- wave_array[1:30000]
+cepstra         <- mfcc_calculate(wave_array, wave_samp_rate)
+'
