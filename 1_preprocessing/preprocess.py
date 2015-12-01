@@ -4,13 +4,17 @@ import pylab as plt
 from scipy.fftpack import fft, fftfreq
 from scipy.io import wavfile
 from scipy.signal import butter, filtfilt, freqs
+from sys import argv
 
 filename = 'probka1.wav'
 filename_out = 'probka1_filtered.wav'
 
-[fs, frames] = wavfile.read(filename)
+[fs, frames] = wavfile.read(filename) # sample rate and data read from file
 ts = 1 / fs
 nyquist_f = fs / 2
+
+print("Sample rate = ", fs)
+print("Nyquist frequency = ", nyquist_f)
 
 # signal = (frames[:, 0] + frames[:, 1]) / 2  # mean value of both channels
 signal = frames[:, 0]  # left (?) channel
@@ -20,8 +24,12 @@ time = np.arange(0, len(signal) * ts, ts)
 # time = time[(time < 0.5)]
 
 # values in fraction of nyquist_f
-low = 0.1
-high = 0.20
+
+# from command line: python file.py 0.1 0.3
+low = float(argv[1])
+high = float(argv[2])
+#low = 0.1
+#high = 0.20
 
 # actual filter
 b, a = butter(2, (low, high), 'bandpass')
