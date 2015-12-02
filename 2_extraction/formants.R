@@ -67,7 +67,6 @@ formants <- function(wave_input, wave_rate){
   #plot(freqArray[1:200]/1000, pf[1:200], type='p', col='black', xlab='Frequency (kHz)', ylab='Power (dB)', main='pf')
   
   #podzielenie na 3 zakresy dla 3 formantow
-  #podzielenie na 3 zakresy dla 3 formantow i znalezienie formantow
   ind_1 <- which(freqArray <= 880 & freqArray >= 200)
   freqArray_1 <- freqArray[ind_1]
   pft_1 <- pft[ind_1]
