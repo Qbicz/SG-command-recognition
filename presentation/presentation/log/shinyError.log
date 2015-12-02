@@ -37,3 +37,4 @@ ERROR: [on_request_read] connection reset by peer
 ERROR: [on_request_read] connection reset by peer
 ERROR: [on_request_read] connection reset by peer
 ERROR: [on_request_read] connection reset by peer
+^C
