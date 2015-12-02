@@ -1,0 +1,39 @@
+Loading required package: shiny
+Loading required package: methods
+
+Listening on http://127.0.0.1:7771
+Ostrze¿enie w poleceniu 'checkEncoding(file)':
+  You should not include the Byte Order Mark (BOM) in C:\Users\albert\Documents\SG-command-recognition\presentation\presentation\shinyInterface/ui.R. Please re-save it in UTF-8 without BOM. See http://shiny.rstudio.com/articles/unicode.html for more info.
+[1] "INIT"
+[1] 440320
+[1] 440320
+[1] "RENDER-START"
+[1] 2
+[1] 440320
+[1] 440320
+[1] "RENDER-START"
+[1] "CLICK!"
+
+C:\Users\albert\Documents\SG-command-recognition\presentation\presentation\shinyInterface>.\..\Python\python.exe .\..\backEnd\record.py 
+* recording
+* done recording
+[1] 440320
+[1] 440320
+[1] "RENDER-STOP"
+[1] 6
+[1] 3
+[1] 5
+[1] 5
+[1] 1
+[1] 4
+[1] 5
+[1] 5
+[1] 4
+[1] 4
+[1] 1
+ERROR: [on_request_read] connection reset by peer
+ERROR: [on_request_read] connection reset by peer
+ERROR: [on_request_read] connection reset by peer
+ERROR: [on_request_read] connection reset by peer
+ERROR: [on_request_read] connection reset by peer
+ERROR: [on_request_read] connection reset by peer

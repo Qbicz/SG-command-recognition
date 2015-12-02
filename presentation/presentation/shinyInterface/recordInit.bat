@@ -1,0 +1,1 @@
+.\..\Python\python.exe .\..\backEnd\record.py

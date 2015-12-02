@@ -1,0 +1,1 @@
+shiny::runApp("./shinyInterface",launch.browser=TRUE)
