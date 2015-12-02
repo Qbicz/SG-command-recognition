@@ -67,6 +67,7 @@ formants <- function(wave_input, wave_rate){
   #plot(freqArray[1:200]/1000, pf[1:200], type='p', col='black', xlab='Frequency (kHz)', ylab='Power (dB)', main='pf')
   
   #podzielenie na 3 zakresy dla 3 formantow
+  #podzielenie na 3 zakresy dla 3 formantow i znalezienie formantow
   ind_1 <- which(freqArray <= 880 & freqArray >= 200)
   freqArray_1 <- freqArray[ind_1]
   pft_1 <- pft[ind_1]
@@ -77,21 +78,21 @@ formants <- function(wave_input, wave_rate){
   freqArray_3 <- freqArray[ind_3]
   pft_3 <- pft[ind_3]
 
-#   #znalezienie formantow - wersja uproszczona
-#   F1 <- freqArray_1[which(pft_1 == max(pft_1))]
-#   F2 <- freqArray_2[which(pft_2 == max(pft_2))]
-#   F3 <- freqArray_3[which(pft_3 == max(pft_3))]
+  #znalezienie formantow - wersja uproszczona
+  F1 <- freqArray_1[which(pft_1 == max(pft_1))]
+  F2 <- freqArray_2[which(pft_2 == max(pft_2))]
+  F3 <- freqArray_3[which(pft_3 == max(pft_3))]
 
   #wyznaczanie maksimow
-  threshold <- 0.05 #??
-  maxima_1 <- quantmod:::findPeaks(pft_1,threshold)
-  maxima_2 <- quantmod:::findPeaks(pft_2,threshold)
-  maxima_3 <- quantmod:::findPeaks(pft_3,threshold)
-    
+  #threshold <- 0.05 #??
+  #maxima_1 <- quantmod:::findPeaks(pft_1,threshold)
+  #maxima_2 <- quantmod:::findPeaks(pft_2,threshold)
+  #maxima_3 <- quantmod:::findPeaks(pft_3,threshold)
+
   #znalezienie formantow
-  F1 <- freqArray_1[maxima_1][which(pft_1[maxima_1] == max(pft_1[maxima_1]))]
-  F2 <- freqArray_2[maxima_2][which(pft_2[maxima_2] == max(pft_2[maxima_2]))]
-  F3 <- freqArray_3[maxima_3][which(pft_3[maxima_3] == max(pft_3[maxima_3]))]
+  #F1 <- freqArray_1[maxima_1][which(pft_1[maxima_1] == max(pft_1[maxima_1]))]
+  #F2 <- freqArray_2[maxima_2][which(pft_2[maxima_2] == max(pft_2[maxima_2]))]
+  #F3 <- freqArray_3[maxima_3][which(pft_3[maxima_3] == max(pft_3[maxima_3]))]
 
   #obsluzyc przypadek wystapienia formantu w przedziale wspolnym dla podprzedzialow
 
