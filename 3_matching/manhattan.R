@@ -17,7 +17,7 @@ n2 <- length(b)
 
 if(n1 != n2) {
 	print("Wektory roznej dlugosci!")
-	return(0)
+	return(-1)
 }
 else {
 	wynik <- c()
