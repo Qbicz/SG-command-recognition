@@ -1,3 +1,5 @@
+library(pracma)
+
 recogn <- function(fileName){
 	source("Granice-wypowiedzi/speech.R");
 	source("1_preprocessing/bandpass_butterworth.R");
@@ -109,3 +111,10 @@ recogn <- function(fileName){
 	return(what);
 	
 }
+
+# Uzycie funkcji do rozpoznawania
+# Trzeba zrobić prostą statystykę
+
+# filename <- "4_tele.wav"
+# what = recogn(filename)
+# print(what)
